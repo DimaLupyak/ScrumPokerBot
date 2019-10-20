@@ -3,31 +3,45 @@ using System.Linq;
 using System.Threading.Tasks;
 using ScrumPokerBot.Models.Commands;
 using Telegram.Bot;
+using Telegram.Bot.Args;
 
 namespace ScrumPokerBot.Models
 {
     public class Bot
     {
-        private static TelegramBotClient botClient;
-        private static List<Command> commandsList;
+        private static TelegramBotClient _botClient;
+        private static List<Command> _commandsList;
 
-        public static IReadOnlyList<Command> Commands => commandsList.AsReadOnly();
+        public static IReadOnlyList<Command> Commands => _commandsList.AsReadOnly();
 
         public static async Task<TelegramBotClient> GetBotClientAsync()
         {
-            if (botClient != null)
+            if (_botClient != null)
             {
-                return botClient;
+                return _botClient;
             }
 
-            commandsList = new List<Command>();
-            commandsList.Add(new VoteCommand());
-            //TODO: Add more commands
+            _commandsList = new List<Command> {new VoteCommand()};
 
-            botClient = new TelegramBotClient(AppSettings.Key);
-            string hook = string.Format(AppSettings.Url, "api/message/update");
-            await botClient.SetWebhookAsync(hook);
-            return botClient;
+            _botClient = new TelegramBotClient(AppSettings.Key);
+            _botClient.OnMessage += BotOnMessage;
+            _botClient.StartReceiving();
+            return _botClient;
+        }
+
+        private static void BotOnMessage(object sender, MessageEventArgs e)
+        {
+            var commands = Bot.Commands;
+            var message = e.Message;
+
+            foreach (var command in commands)
+            {
+                if (command.Contains(message))
+                {
+                    command.Execute(message, _botClient);
+                    break;
+                }
+            }
         }
     }
 }
