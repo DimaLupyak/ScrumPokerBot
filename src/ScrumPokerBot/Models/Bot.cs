@@ -15,7 +15,7 @@ namespace ScrumPokerBot.Models
         private static readonly DateTime RunTime = DateTime.Now;
         private static TelegramBotClient _botClient;
         private static List<Command> _commandsList;
-        public static Settings Settings;
+        public static List<Voice> Votes { get; set; } = new List<Voice>();
 
         public static IReadOnlyList<Command> Commands => _commandsList.AsReadOnly();
 
@@ -24,14 +24,6 @@ namespace ScrumPokerBot.Models
             if (_botClient != null)
             {
                 return _botClient;
-            }
-
-            try
-            {
-                Settings = new Settings(AppSettings.VotesFile);
-            }
-            catch (Exception ex)
-            {
             }
 
             _commandsList = new List<Command> {new VoteCommand()};
@@ -68,7 +60,7 @@ namespace ScrumPokerBot.Models
                 {
                     int num = int.Parse(ev.CallbackQuery.Data[ev.CallbackQuery.Data.Length - 1].ToString());
 
-                    var currentVoice = Settings.VoiceList.First(gol => gol.MessageId == ev.CallbackQuery.Message.MessageId);
+                    var currentVoice = Votes.First(gol => gol.MessageId == ev.CallbackQuery.Message.MessageId);
                     var variants = currentVoice.Answers;
 
                     //Whan "Show results is clicked"
@@ -149,7 +141,6 @@ namespace ScrumPokerBot.Models
                     catch (Exception) { }
                 }
                 catch (Exception) { }
-                Settings.Save();
             }
         }
     }

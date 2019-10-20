@@ -11,7 +11,7 @@ namespace ScrumPokerBot.Models
         public static string Name { get; set; } = "StoryPointer";
         public static string Key { get; set; } = "661853198:AAFgXwHOBMszOuvJT4x1iSODGY5Yjch11hQ";
 
-        public static string VotesFile { get; set; } = "Files/Settings.xml";
+        public static string VotesFile { get; set; } = "Files/Votes.xml";
         
     }
 }

@@ -49,8 +49,7 @@ namespace ScrumPokerBot.Models.Commands
 
                 var keyboard = new InlineKeyboardMarkup(buttons);
                 var mess = await botClient.SendTextMessageAsync(message.Chat.Id, title, ParseMode.Default, false, false, 0, keyboard);
-                Bot.Settings.VoiceList.Add(new Voice(mess.MessageId, title, variants));
-                Bot.Settings.Save();
+                Bot.Votes.Add(new Voice(mess.MessageId, title, variants));
 
             }
             catch (Exception ex)
