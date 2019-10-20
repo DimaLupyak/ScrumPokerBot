@@ -128,7 +128,7 @@ namespace ScrumPokerBot.Models
                         var nums = currentVoice.Votes.Count;
                         buttons[2][0] = new InlineKeyboardButton
                         {
-                            Text = "Show VotesFile " + " (" + nums + ")",
+                            Text = "Show Votes " + " (" + nums + ")",
                             CallbackData = "callbackVoice" + (7)
                         };
                     }
