@@ -31,12 +31,11 @@ namespace ScrumPokerBot.Models
 
         private static void BotOnMessage(object sender, MessageEventArgs e)
         {
-            var commands = Bot.Commands;
             var message = e.Message;
 
-            foreach (var command in commands)
+            foreach (var command in Commands)
             {
-                if (command.Contains(message))
+                //if (command.Contains(message))
                 {
                     command.Execute(message, _botClient);
                     break;
