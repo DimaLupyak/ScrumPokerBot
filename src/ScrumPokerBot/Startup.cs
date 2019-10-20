@@ -42,6 +42,7 @@ namespace ScrumPokerBot
             }
 
             Bot.GetBotClientAsync().Wait();
+
         }
     }
 }
