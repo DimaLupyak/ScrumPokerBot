@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.DependencyInjection;
+using ScrumPokerBot.Models;
 
 namespace ScrumPokerBot
 {
@@ -39,6 +40,8 @@ namespace ScrumPokerBot
                     .AddRedirectToHttpsPermanent();
                 app.UseRewriter(options);
             }
+
+            Bot.GetBotClientAsync().Wait();
         }
     }
 }
