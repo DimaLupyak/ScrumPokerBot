@@ -2,4 +2,4 @@ version: 1.0.{build}
 image: Ubuntu
 
 build_script:
-  - docker build -t ScrumPokerBot .
+  - docker build -t scrum-poker-bot .
