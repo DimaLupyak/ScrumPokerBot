@@ -1,16 +1,15 @@
 {
-  "addons": [
-
-  ],
+  "name": "scrum-poker-bot",
+  "description": "Telegram bot that helps to organaise planning poker for scrum teams to determine the complexity of stories.  ",
+  "repository": "https://github.com/DimaLupyak/ScrumPokerBot",
+  "keywords": ["aspnet", "core"],
+  "stack": "heroku-16",
   "buildpacks": [
-
-  ],
-  "env": {
-  },
-  "formation": {
-  },
-  "name": "ScrumPokerBot",
-  "scripts": {
-  },
-  "stack": "container"
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    },
+    {
+      "url": "https://github.com/jincod/dotnetcore-buildpack"
+    }
+  ]
 }

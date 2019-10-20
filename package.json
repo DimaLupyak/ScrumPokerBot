@@ -1,0 +1,28 @@
+{
+  "name": "scrum-poker-bot-app",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Scrum poker bot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DimaLupyak/ScrumPokerBot"
+  },
+  "dependencies": {
+    "react": "16.9.0",
+    "react-dom": "16.9.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "proxy": "http://localhost:5000",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "react-scripts": "3.1.1"
+  }
+}
