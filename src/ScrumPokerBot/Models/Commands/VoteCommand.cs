@@ -23,7 +23,7 @@ namespace ScrumPokerBot.Models.Commands
         {
             try
             {
-                var title = "Make your choose";
+                var title = "Make your choice";
                 var variants = new[] { "1", "2", "3", "5", "8", "13", "21" };
                 var buttons = new InlineKeyboardButton[2][];
                 buttons[0] = new InlineKeyboardButton[4];
