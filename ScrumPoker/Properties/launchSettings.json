@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:50619/",
+      "applicationUrl": "http://localhost:6190/",
       "sslPort": 0
     }
   },
@@ -15,14 +15,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ScrumPokerBot": {
+    "SampleWebApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "SCRUM_POKER_BOT_TOKEN": "661853198:AAFgXwHOBMszOuvJT4x1iSODGY5Yjch11hQ"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:50620/"
+      "applicationUrl": "http://localhost:6194/"
     }
   }
 }

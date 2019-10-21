@@ -19,7 +19,7 @@ namespace ScrumPokerBot.Models
 
         public static IReadOnlyList<Command> Commands => _commandsList.AsReadOnly();
 
-        public static async Task<TelegramBotClient> GetBotClientAsync()
+        public static async Task<TelegramBotClient> GetBotClientAsync(string token)
         {
             if (_botClient != null)
             {
@@ -28,7 +28,7 @@ namespace ScrumPokerBot.Models
 
             _commandsList = new List<Command> {new VoteCommand()};
 
-            _botClient = new TelegramBotClient(AppSettings.Key);
+            _botClient = new TelegramBotClient(token);
             _botClient.OnMessage += BotOnMessage;
             _botClient.OnCallbackQuery += OnBotCallbackQuery;
             _botClient.StartReceiving();

@@ -41,7 +41,7 @@ namespace ScrumPokerBot
                 app.UseRewriter(options);
             }
 
-            Bot.GetBotClientAsync().Wait();
+            Bot.GetBotClientAsync(Environment.GetEnvironmentVariable("SCRUM_POKER_BOT_TOKEN")).Wait();
 
         }
     }
