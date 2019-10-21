@@ -1,33 +1,14 @@
 import React, {Component} from 'react';
-import api from './api';
 
-export default class List extends Component {
+export default class Main extends Component {
 	constructor(props) {
-		super(props);
-
-		this.state = {
-			items: []
-		};
+		super(props);		
 	}
-
-	componentDidMount() {
-		api.getValues()
-			.then(items => this.setState({items}));
-	}
-
+	
 	render() {
-		const {items} = this.state;
-
 		return (
 			<div>
-				<h1>Values</h1>
-				{
-					items.map((item, index) => (
-						<li key={index} className="list-group-item">
-							{item}
-						</li>
-					))
-				}
+				<h1>Hi, I'm a scrum poker bot and its my hone.</h1>				
 			</div>
 		);
 	}
