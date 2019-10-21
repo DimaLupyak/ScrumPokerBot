@@ -8,7 +8,7 @@ export default class Main extends Component {
 	render() {
 		return (
 			<div>
-				<h1>Hi, I'm a scrum poker bot and its my hone.</h1>				
+				<h1>Hi, I'm a scrum poker bot. This site is my home. Welcome.</h1>				
 			</div>
 		);
 	}
