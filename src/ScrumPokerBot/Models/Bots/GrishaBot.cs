@@ -16,8 +16,15 @@ namespace BotsController.Models.Bots
                 return _botClient;
             }
 
-            _commands = new List<Command> { new PingCommand() };
-            _callbacks = new List<Callback> {};
+            _commands = new List<Command>
+            {
+                new PingCommand(),
+                new SickerCommand()
+            };
+            _callbacks = new List<Callback>
+            {
+
+            };
 
             _botClient = new TelegramBotClient(token);
             _botClient.OnMessage += BotOnMessage;
