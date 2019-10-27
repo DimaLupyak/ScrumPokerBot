@@ -13,7 +13,7 @@ namespace ScrumPokerBot.Models.Commands
 
         public override bool Contains(Message message)
         {
-            if (message.Type != Telegram.Bot.Types.Enums.MessageType.Text)
+            if (message.Type != MessageType.Text)
                 return false;
 
             return message.Text.Contains(this.Name);

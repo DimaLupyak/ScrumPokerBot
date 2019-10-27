@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ScrumPokerBot.Models.Callbacks;
 using ScrumPokerBot.Models.Commands;
 using Telegram.Bot;
 using Telegram.Bot.Args;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace ScrumPokerBot.Models
 {
@@ -14,19 +11,23 @@ namespace ScrumPokerBot.Models
     {
         private static readonly DateTime RunTime = DateTime.Now;
         private static TelegramBotClient _botClient;
-        private static List<Command> _commandsList;
+        private static List<Command> _commands;
+        private static List<Callback> _collbacks;
+
         public static List<Voice> Votes { get; set; } = new List<Voice>();
 
-        public static IReadOnlyList<Command> Commands => _commandsList.AsReadOnly();
+        public static IReadOnlyList<Command> Commands => _commands.AsReadOnly();
+        public static IReadOnlyList<Callback> Callbacks => _collbacks.AsReadOnly();
 
-        public static async Task<TelegramBotClient> GetBotClientAsync(string token)
+        public static TelegramBotClient GetBotClientAsync(string token)
         {
             if (_botClient != null)
             {
                 return _botClient;
             }
 
-            _commandsList = new List<Command> {new VoteCommand()};
+            _commands = new List<Command> { new VoteCommand() };
+            _collbacks = new List<Callback> { new VoteCallback() };
 
             _botClient = new TelegramBotClient(token);
             _botClient.OnMessage += BotOnMessage;
@@ -54,93 +55,13 @@ namespace ScrumPokerBot.Models
 
         private static void OnBotCallbackQuery(object sender, CallbackQueryEventArgs ev)
         {
-            if (ev.CallbackQuery.Data.Contains("callbackVoice"))
+            foreach (var callback in Callbacks)
             {
-                try
+                if (callback.Contains(ev.CallbackQuery))
                 {
-                    int num = int.Parse(ev.CallbackQuery.Data[ev.CallbackQuery.Data.Length - 1].ToString());
-
-                    var currentVoice = Votes.First(gol => gol.MessageId == ev.CallbackQuery.Message.MessageId);
-                    var variants = currentVoice.Answers;
-
-                    //Whan "Show results is clicked"
-                    if (num == 7)
-                    {
-                        currentVoice.IsOpened = true;
-                    }
-                    else
-                    {
-                        if (currentVoice.IsOpened)
-                        {
-                            var all = string.Format("{0}:\r\n {1}", currentVoice.Answers[num],
-                                string.Join(",\r\n ",
-                                    currentVoice.Votes
-                                        .Where(item => item.Value == num)
-                                        .Select(item => item.Key)));
-                            _botClient.AnswerCallbackQueryAsync(ev.CallbackQuery.Id, all, true);
-                            return;
-                        }
-                        if (!currentVoice.Votes.ContainsKey(ev.CallbackQuery.From.FirstName + ev.CallbackQuery.From.LastName))
-                        {
-                            currentVoice.Votes.Add(ev.CallbackQuery.From.FirstName + ev.CallbackQuery.From.LastName, num);
-                        }
-                    }
-
-                    var buttonLinesCount = currentVoice.IsOpened ? 2 : 3;
-
-                    var buttons = new InlineKeyboardButton[buttonLinesCount][];
-                    buttons[0] = new InlineKeyboardButton[4];
-                    buttons[1] = new InlineKeyboardButton[3];
-                    if (buttons.Length > 2)
-                    {
-                        buttons[2] = new InlineKeyboardButton[1];
-                    }
-
-                    for (var i = 0; i < 4; i++)
-                    {
-                        var nums = string.Empty;
-                        if (currentVoice.IsOpened)
-                        {
-                            nums = " (" + currentVoice.Votes.Where(a => a.Value == i).ToArray().Length + ")";
-                        }
-                        buttons[0][i] = new InlineKeyboardButton
-                        {
-                            Text = variants[i] + nums,
-                            CallbackData = "callbackVoice" + i
-                        };
-                    }
-                    for (var i = 0; i < 3; i++)
-                    {
-                        var nums = string.Empty;
-                        if (currentVoice.IsOpened)
-                        {
-                            nums = " (" + currentVoice.Votes.Where(a => a.Value == i + 4).ToArray().Length + ")";
-                        }
-                        buttons[1][i] = new InlineKeyboardButton
-                        {
-                            Text = variants[i + 4] + nums,
-                            CallbackData = "callbackVoice" + (i + 4)
-                        };
-
-                    }
-                    if (buttons.Length > 2)
-                    {
-                        var nums = currentVoice.Votes.Count;
-                        buttons[2][0] = new InlineKeyboardButton
-                        {
-                            Text = "Show Votes " + " (" + nums + ")",
-                            CallbackData = "callbackVoice" + (7)
-                        };
-                    }
-
-                    var keyboard = new InlineKeyboardMarkup(buttons);
-                    try
-                    {
-                        _botClient.EditMessageTextAsync(ev.CallbackQuery.Message.Chat.Id, currentVoice.MessageId, currentVoice.Question, ParseMode.Default, false, keyboard);
-                    }
-                    catch (Exception) { }
+                    callback.Execute(ev.CallbackQuery, _botClient);
+                    break;
                 }
-                catch (Exception) { }
             }
         }
     }
