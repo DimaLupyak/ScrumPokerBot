@@ -28,7 +28,7 @@ namespace BotsController.Models.Bots
 
             foreach (var command in Commands)
             {
-                if (command.Contains(message))
+                if (command.ShouldExecute(message))
                 {
                     command.Execute(message, _botClient);
                     break;

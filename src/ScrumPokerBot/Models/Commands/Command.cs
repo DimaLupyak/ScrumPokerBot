@@ -11,7 +11,7 @@ namespace BotsController.Models.Commands
 
         public abstract Task Execute(Message message, TelegramBotClient client);
 
-        public virtual bool Contains(Message message)
+        public virtual bool ShouldExecute(Message message)
         {
             if (message.Type != MessageType.Text)
                 return false;
