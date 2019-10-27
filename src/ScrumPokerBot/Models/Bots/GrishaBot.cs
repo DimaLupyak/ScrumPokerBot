@@ -7,11 +7,8 @@ using Telegram.Bot.Args;
 
 namespace BotsController.Models.Bots
 {
-    public class ScrumPokerBot : ABot
+    public class GrishaBot : ABot
     {
-
-        public static List<Voice> Votes { get; set; } = new List<Voice>();
-
         public override TelegramBotClient GetBotClient(string token)
         {
             if (_botClient != null)
@@ -19,8 +16,8 @@ namespace BotsController.Models.Bots
                 return _botClient;
             }
 
-            _commands = new List<Command> { new VoteCommand(), new PingCommand() };
-            _callbacks = new List<Callback> { new VoteCallback() };
+            _commands = new List<Command> { new PingCommand() };
+            _callbacks = new List<Callback> {};
 
             _botClient = new TelegramBotClient(token);
             _botClient.OnMessage += BotOnMessage;

@@ -43,6 +43,7 @@ namespace BotsController
             }
 
             new ScrumPokerBot().GetBotClient(Environment.GetEnvironmentVariable("SCRUM_POKER_BOT_TOKEN"));
+            new GrishaBot().GetBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));
 
         }
     }
