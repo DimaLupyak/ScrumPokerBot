@@ -1,23 +1,16 @@
 using System;
 using System.Threading.Tasks;
+using BotsController.Models.Bots;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace ScrumPokerBot.Models.Commands
+namespace BotsController.Models.Commands
 {
     public class VoteCommand : Command
     {
         public override string Name => @"/vote";
-
-        public override bool Contains(Message message)
-        {
-            if (message.Type != MessageType.Text)
-                return false;
-
-            return message.Text.Contains(this.Name);
-        }
 
         public override async Task Execute(Message message, TelegramBotClient botClient)
         {
@@ -49,7 +42,7 @@ namespace ScrumPokerBot.Models.Commands
 
                 var keyboard = new InlineKeyboardMarkup(buttons);
                 var mess = await botClient.SendTextMessageAsync(message.Chat.Id, title, ParseMode.Default, false, false, 0, keyboard);
-                Bot.Votes.Add(new Voice(mess.MessageId, title, variants));
+                ScrumPokerBot.Votes.Add(new Voice(mess.MessageId, title, variants));
 
             }
             catch (Exception ex)

@@ -1,11 +1,12 @@
 using System;
+using BotsController.Models;
+using BotsController.Models.Bots;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.DependencyInjection;
-using ScrumPokerBot.Models;
 
-namespace ScrumPokerBot
+namespace BotsController
 {
     public class Startup
     {
@@ -41,7 +42,7 @@ namespace ScrumPokerBot
                 app.UseRewriter(options);
             }
 
-            Bot.GetBotClientAsync(Environment.GetEnvironmentVariable("SCRUM_POKER_BOT_TOKEN"));
+            new ScrumPokerBot().GetBotClient(Environment.GetEnvironmentVariable("SCRUM_POKER_BOT_TOKEN"));
 
         }
     }

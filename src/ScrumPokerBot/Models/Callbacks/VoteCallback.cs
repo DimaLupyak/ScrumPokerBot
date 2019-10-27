@@ -1,12 +1,13 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using BotsController.Models.Bots;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace ScrumPokerBot.Models.Callbacks
+namespace BotsController.Models.Callbacks
 {
     public class VoteCallback : Callback
     {
@@ -18,7 +19,7 @@ namespace ScrumPokerBot.Models.Callbacks
             {
                 int num = int.Parse(query.Data[^1].ToString());
 
-                var currentVoice = Bot.Votes.First(gol => gol.MessageId == query.Message.MessageId);
+                var currentVoice = ScrumPokerBot.Votes.First(gol => gol.MessageId == query.Message.MessageId);
                 var variants = currentVoice.Answers;
 
                 //Whan "Show results is clicked"

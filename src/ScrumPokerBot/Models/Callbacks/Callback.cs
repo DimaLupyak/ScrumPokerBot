@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace ScrumPokerBot.Models.Callbacks
+namespace BotsController.Models.Callbacks
 {
     public abstract class Callback
     {

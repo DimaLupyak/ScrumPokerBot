@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ScrumPokerBot
+namespace BotsController
 {
     public class Program
     {

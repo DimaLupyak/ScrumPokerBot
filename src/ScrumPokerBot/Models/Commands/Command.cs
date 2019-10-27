@@ -1,8 +1,9 @@
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
-namespace ScrumPokerBot.Models.Commands
+namespace BotsController.Models.Commands
 {
     public abstract class Command
     {
@@ -10,6 +11,12 @@ namespace ScrumPokerBot.Models.Commands
 
         public abstract Task Execute(Message message, TelegramBotClient client);
 
-        public abstract bool Contains(Message message);
+        public virtual bool Contains(Message message)
+        {
+            if (message.Type != MessageType.Text)
+                return false;
+
+            return message.Text.Contains(this.Name);
+        }
     }
 }
