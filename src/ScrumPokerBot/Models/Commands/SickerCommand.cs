@@ -15,7 +15,7 @@ namespace BotsController.Models.Commands
 
         public override bool ShouldExecute(Message message)
         {
-            return base.ShouldExecute(message) && random.Next(100) < 50;
+            return random.Next(100) < 1;
         }
 
         public override async Task Execute(Message message, TelegramBotClient client)
