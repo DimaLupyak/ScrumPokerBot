@@ -12,7 +12,7 @@ namespace BotsController.Models.Commands
     {
         public override string Name => @"/vote";
 
-        public override async Task Execute(Message message, TelegramBotClient botClient)
+        public override async Task ExecuteAsync(Message message, TelegramBotClient botClient)
         {
             try
             {

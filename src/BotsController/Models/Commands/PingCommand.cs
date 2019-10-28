@@ -8,9 +8,9 @@ namespace BotsController.Models.Commands
     {
         public override string Name => @"/ping";
 
-        public override async Task Execute(Message message, TelegramBotClient botClient)
+        public override Task ExecuteAsync(Message message, TelegramBotClient botClient)
         {
-            await botClient.SendTextMessageAsync(message.Chat.Id, "pong");
+            return botClient.SendTextMessageAsync(message.Chat.Id, "pong");
         }
     }
 }

@@ -9,7 +9,7 @@ namespace BotsController.Models.Commands
     {
         public abstract string Name { get; }
 
-        public abstract Task Execute(Message message, TelegramBotClient client);
+        public abstract Task ExecuteAsync(Message message, TelegramBotClient client);
 
         public virtual bool ShouldExecute(Message message)
         {

@@ -30,7 +30,7 @@ namespace BotsController.Models.Bots
             {
                 if (command.ShouldExecute(message))
                 {
-                    command.Execute(message, _botClient);
+                    command.ExecuteAsync(message, _botClient);
                     break;
                 }
             }
