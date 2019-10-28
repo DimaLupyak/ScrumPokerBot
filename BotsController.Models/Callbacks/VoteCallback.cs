@@ -13,16 +13,16 @@ namespace BotsController.Models.Callbacks
     {
         public override string Name => @"callbackVoice";
 
-        public override async Task Execute(CallbackQuery query, TelegramBotClient client)
+        public override async Task ExecuteAsync(CallbackQuery query, TelegramBotClient client)
         {
             try
             {
-                int num = int.Parse(query.Data[^1].ToString());
+                int num = int.Parse(query.Data[query.Data.Length - 1].ToString());
 
                 var currentVoice = ScrumPokerBot.Votes.First(gol => gol.MessageId == query.Message.MessageId);
                 var variants = currentVoice.Answers;
 
-                //Whan "Show results is clicked"
+                //When "Show results is clicked"
                 if (num == 7)
                 {
                     currentVoice.IsOpened = true;
@@ -31,12 +31,9 @@ namespace BotsController.Models.Callbacks
                 {
                     if (currentVoice.IsOpened)
                     {
-                        var all = string.Format("{0}:\r\n {1}", currentVoice.Answers[num],
-                            string.Join(",\r\n ",
-                                currentVoice.Votes
-                                    .Where(item => item.Value == num)
-                                    .Select(item => item.Key)));
-                        await client.AnswerCallbackQueryAsync(query.Id, all, true);
+                        var all =
+                            $"{currentVoice.Answers[num]}:\r\n {string.Join(",\r\n ", currentVoice.Votes.Where(item => item.Value == num).Select(item => item.Key))}";
+                        await client.AnswerCallbackQueryAsync(query.Id, all, true).ConfigureAwait(false);
                         return;
                     }
                     if (!currentVoice.Votes.ContainsKey(query.From.FirstName + query.From.LastName))
@@ -57,43 +54,42 @@ namespace BotsController.Models.Callbacks
 
                 for (var i = 0; i < 4; i++)
                 {
-                    var nums = string.Empty;
+                    var choicesCount = string.Empty;
                     if (currentVoice.IsOpened)
                     {
-                        nums = " (" + currentVoice.Votes.Where(a => a.Value == i).ToArray().Length + ")";
+                        choicesCount = $" ({currentVoice.Votes.Count(a => a.Value == i)})";
                     }
                     buttons[0][i] = new InlineKeyboardButton
                     {
-                        Text = variants[i] + nums,
+                        Text = variants[i] + choicesCount,
                         CallbackData = "callbackVoice" + i
                     };
                 }
                 for (var i = 0; i < 3; i++)
                 {
-                    var nums = string.Empty;
+                    var choicesCount = string.Empty;
                     if (currentVoice.IsOpened)
                     {
-                        nums = " (" + currentVoice.Votes.Where(a => a.Value == i + 4).ToArray().Length + ")";
+                        choicesCount = $" ({currentVoice.Votes.Count(a => a.Value == i + 4)})";
                     }
                     buttons[1][i] = new InlineKeyboardButton
                     {
-                        Text = variants[i + 4] + nums,
+                        Text = variants[i + 4] + choicesCount,
                         CallbackData = "callbackVoice" + (i + 4)
                     };
 
                 }
                 if (buttons.Length > 2)
                 {
-                    var nums = currentVoice.Votes.Count;
                     buttons[2][0] = new InlineKeyboardButton
                     {
-                        Text = "Show Votes " + " (" + nums + ")",
-                        CallbackData = "callbackVoice" + (7)
+                        Text = "Show Votes " + " (" + currentVoice.Votes.Count + ")",
+                        CallbackData = "callbackVoice7" + 7
                     };
                 }
 
                 var keyboard = new InlineKeyboardMarkup(buttons);
-                await client.EditMessageTextAsync(query.Message.Chat.Id, currentVoice.MessageId, currentVoice.Question, ParseMode.Default, false, keyboard);
+                await client.EditMessageTextAsync(query.Message.Chat.Id, currentVoice.MessageId, currentVoice.Question, ParseMode.Default, false, keyboard).ConfigureAwait(false);
             }
             catch (Exception) { }
         }

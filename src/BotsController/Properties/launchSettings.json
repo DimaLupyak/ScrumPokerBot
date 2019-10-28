@@ -21,7 +21,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "SCRUM_POKER_BOT_TOKEN": "661853198:AAFgXwHOBMszOuvJT4x1iSODGY5Yjch11hQ",
-        "GRISHA_BOT_TOKEN": "474545390:AAHstOZ9Bh8GfpSTXkXk_rVYX7PkMIyw59M"
+        "GRISHA_BOT_TOKEN": "474545390:AAHstOZ9Bh8GfpSTXkXk_rVYX7PkMIyw59M",
+        "DATA_BASE_FILE": "Internal/internal.db"
       },
       "applicationUrl": "http://localhost:50620/"
     }

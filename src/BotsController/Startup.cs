@@ -1,6 +1,8 @@
 using System;
+using BotsController.DAL;
 using BotsController.Models;
 using BotsController.Models.Bots;
+using BotsController.Models.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -18,9 +20,13 @@ namespace BotsController
                 {
                     options.AddPolicy("CorsPolicy",
                         builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
                 });
+            services.AddSingleton(db => new LiteDbContext(Environment.GetEnvironmentVariable("DATA_BASE_FILE")));
+            services.AddSingleton<IRepository<Voice>, LiteDbRepository<Voice>>();
+            services.AddSingleton<ScrumPokerBot, ScrumPokerBot>();
+            services.AddSingleton<GrishaBot, GrishaBot>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,10 +47,6 @@ namespace BotsController
                     .AddRedirectToHttpsPermanent();
                 app.UseRewriter(options);
             }
-
-            new ScrumPokerBot().GetBotClient(Environment.GetEnvironmentVariable("SCRUM_POKER_BOT_TOKEN"));
-            new GrishaBot().GetBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));
-
         }
     }
 }

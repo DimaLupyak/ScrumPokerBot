@@ -9,13 +9,8 @@ namespace BotsController.Models.Bots
 {
     public class GrishaBot : ABot
     {
-        public override TelegramBotClient GetBotClient(string token)
+        public GrishaBot()
         {
-            if (_botClient != null)
-            {
-                return _botClient;
-            }
-
             _commands = new List<Command>
             {
                 new PingCommand(),
@@ -26,11 +21,10 @@ namespace BotsController.Models.Bots
 
             };
 
-            _botClient = new TelegramBotClient(token);
+            _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));
             _botClient.OnMessage += BotOnMessage;
             _botClient.OnCallbackQuery += OnBotCallbackQuery;
             _botClient.StartReceiving();
-            return _botClient;
         }
     }
 }

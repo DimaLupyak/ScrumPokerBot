@@ -16,9 +16,7 @@ namespace BotsController.Models.Bots
         
         protected IReadOnlyList<Command> Commands => _commands.AsReadOnly();
         protected IReadOnlyList<Callback> Callbacks => _callbacks.AsReadOnly();
-
-        public abstract TelegramBotClient GetBotClient(string token);
-
+        
         protected virtual void BotOnMessage(object sender, MessageEventArgs e)
         {
             if (e.Message.Date.ToFileTimeUtc() < RunTime.ToFileTimeUtc())
@@ -42,7 +40,7 @@ namespace BotsController.Models.Bots
             {
                 if (callback.Contains(ev.CallbackQuery))
                 {
-                    callback.Execute(ev.CallbackQuery, _botClient);
+                    callback.ExecuteAsync(ev.CallbackQuery, _botClient);
                     break;
                 }
             }

@@ -8,7 +8,7 @@ namespace BotsController.Models.Callbacks
     {
         public abstract string Name { get; }
 
-        public abstract Task Execute(CallbackQuery query, TelegramBotClient client);
+        public abstract Task ExecuteAsync(CallbackQuery query, TelegramBotClient client);
 
         public virtual bool Contains(CallbackQuery query)
         {

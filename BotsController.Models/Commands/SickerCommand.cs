@@ -17,12 +17,15 @@ namespace BotsController.Models.Commands
             {
                 "BlueRobots",
                 "VoldemarDenchik",
-                "metairony"
+                "metairony",
+                "sad_crying_cat",
+                "BOMZHI_eeZee",
+                "citati_prosto"
             };
 
         public override bool ShouldExecute(Message message)
         {
-            return random.Next(100) < 2;
+            return random.Next(100) < 5;
         }
 
         public override async Task ExecuteAsync(Message message, TelegramBotClient client)
