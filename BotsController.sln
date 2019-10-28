@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotsController", "src\ScrumPokerBot\BotsController.csproj", "{FA0CC66E-5D01-4557-8438-777D6F18DD75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotsController", "src\BotsController\BotsController.csproj", "{FA0CC66E-5D01-4557-8438-777D6F18DD75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

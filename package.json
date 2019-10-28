@@ -5,7 +5,7 @@
   "description": "Scrum poker bot",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DimaLupyak/ScrumPokerBot"
+    "url": "https://github.com/DimaLupyak/BotsController"
   },
   "dependencies": {
     "react": "16.9.0",
