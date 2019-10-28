@@ -13,6 +13,13 @@ namespace BotsController.Models.Commands
         private readonly Random random = new Random();
         public override string Name => @"sticker";
 
+        private readonly string[] stickerPacks =
+            {
+                "BlueRobots",
+                "VoldemarDenchik",
+                "metairony"
+            };
+
         public override bool ShouldExecute(Message message)
         {
             return random.Next(100) < 2;
@@ -21,9 +28,10 @@ namespace BotsController.Models.Commands
         public override async Task ExecuteAsync(Message message, TelegramBotClient client)
         {
             var stickers = new List<Sticker>();
-            stickers.AddRange((await client.GetStickerSetAsync("BlueRobots").ConfigureAwait(false)).Stickers);
-            stickers.AddRange((await client.GetStickerSetAsync("VoldemarDenchik").ConfigureAwait(false)).Stickers);
-            stickers.AddRange((await client.GetStickerSetAsync("metairony").ConfigureAwait(false)).Stickers);
+            foreach (var stickerPack in stickerPacks)
+            {
+                stickers.AddRange((await client.GetStickerSetAsync(stickerPack).ConfigureAwait(false)).Stickers);
+            }
             await client.SendStickerAsync(message.Chat.Id,
                 new InputOnlineFile(stickers[random.Next(stickers.Count)].FileId)).ConfigureAwait(true);
         }
