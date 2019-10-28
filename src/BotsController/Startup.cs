@@ -12,6 +12,10 @@ namespace BotsController
 {
     public class Startup
     {
+        public Startup(IHostingEnvironment env)
+        {
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services
@@ -29,7 +33,7 @@ namespace BotsController
             services.AddSingleton<GrishaBot, GrishaBot>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
             app
                 .UseRouting()
@@ -47,6 +51,10 @@ namespace BotsController
                     .AddRedirectToHttpsPermanent();
                 app.UseRewriter(options);
             }
+
+            services.GetService(typeof(GrishaBot));
+            services.GetService(typeof(ScrumPokerBot));
+
         }
     }
 }
