@@ -8,22 +8,23 @@ namespace BotsController.Models.Commands
 {
     public class MaxCommand : Command
     {
-        public override string Name => @"/max";
+        public override string Name => @"макс";
 
+        private string maxStickerFileId = "CAADAgADXAADXnqpFgYOGj8qLFTeFgQ";
+        readonly Random random = new Random();
         public override async Task ExecuteAsync(Message message, TelegramBotClient client)
         {
             try
             {
-                var stickerSet = await client.GetStickerSetAsync("More_Faces");
-                foreach (var sticker in stickerSet.Stickers)
+                if (random.Next(100) < 20)
                 {
-                    await client.SendTextMessageAsync(message.Chat.Id, sticker.FileId);
                     await client.SendStickerAsync(message.Chat.Id,
-                        new InputOnlineFile(sticker.FileId)).ConfigureAwait(true);
-                    await client.SendTextMessageAsync(message.Chat.Id, sticker.FileId);
+                        new InputOnlineFile(maxStickerFileId));
                 }
-
-                await client.SendTextMessageAsync(message.Chat.Id, "Аве Макс!!!");
+                else
+                {
+                    await client.SendTextMessageAsync(message.Chat.Id, "Аве Макс!!!");
+                }
             }
             catch (Exception ex)
             {

@@ -12,7 +12,7 @@ namespace BotsController.Models.Bots
     {
         public ScrumPokerBot(IRepository<Voice> voiceRepository)
         {
-            _commands = new List<Command> { new VoteCommand(voiceRepository), new PingCommand(), new MaxCommand()};
+            _commands = new List<Command> { new VoteCommand(voiceRepository), new PingCommand()};
             _callbacks = new List<Callback> { new VoteCallback(voiceRepository) };
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("SCRUM_POKER_BOT_TOKEN"));
