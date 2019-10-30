@@ -12,6 +12,11 @@ namespace BotsController.Models.Data
         public int MessageId { get; set; }
         public bool IsOpened { get; set; }
 
+        public Voice()
+        {
+
+        }
+
         public Voice(int mId, string question, string[] answers)
         {
             Id = mId.ToString();
