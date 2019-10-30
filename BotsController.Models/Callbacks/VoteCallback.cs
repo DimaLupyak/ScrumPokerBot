@@ -108,7 +108,7 @@ namespace BotsController.Models.Callbacks
             }
             catch (Exception ex)
             {
-                client.SendTextMessageAsync(query.Message.Chat.Id, ex.ToString());
+                client.SendTextMessageAsync(query.Message.Chat.Id, "Я забув про це голосування =(");
 
             }
         }

@@ -14,7 +14,7 @@ namespace BotsController.Models.Commands
         {
             try
             {
-                string name = message.Text.Replace(Name, string.Empty);
+                string name = message.Text.ToLower().Replace(Name, string.Empty);
                 var joke = GetDamn(name).Result;
                 return botClient.SendTextMessageAsync(message.Chat.Id, joke);
             }
