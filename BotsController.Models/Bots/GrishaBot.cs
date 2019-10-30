@@ -16,7 +16,8 @@ namespace BotsController.Models.Bots
                 new PingCommand(),
                 new SickerCommand(),
                 new MaxCommand(),
-                new JokeCommand()
+                new JokeCommand(),
+                new DamnCommand()
             };
             _callbacks = new List<Callback>
             {
