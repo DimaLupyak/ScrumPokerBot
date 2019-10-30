@@ -14,7 +14,7 @@ namespace BotsController.Models.Commands
         {
             try
             {
-                var stickerSet = await client.GetStickerSetAsync("More Squad");
+                var stickerSet = await client.GetStickerSetAsync("More_Faces");
                 foreach (var sticker in stickerSet.Stickers)
                 {
                     await client.SendTextMessageAsync(message.Chat.Id, sticker.FileId);
