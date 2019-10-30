@@ -16,7 +16,7 @@ namespace BotsController.Models.Commands
             if (message.Type != MessageType.Text)
                 return false;
 
-            return message.Text.Contains(this.Name);
+            return message.Text.ToLower().Contains(this.Name.ToLower());
         }
     }
 }
