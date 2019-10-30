@@ -2,24 +2,33 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using BotsController.Models.Bots;
+using BotsController.Models.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using Voice = BotsController.Models.Data.Voice;
 
 namespace BotsController.Models.Callbacks
 {
     public class VoteCallback : Callback
     {
+        private readonly IRepository<Voice> _voiceRepository;
+
+        public VoteCallback(IRepository<Voice> voiceRepository)
+        {
+            _voiceRepository = voiceRepository;
+        }
+
         public override string Name => @"callbackVoice";
 
         public override async Task ExecuteAsync(CallbackQuery query, TelegramBotClient client)
         {
             try
             {
-                int num = int.Parse(query.Data[query.Data.Length - 1].ToString());
+                int num = int.Parse(query.Data[^1].ToString());
 
-                var currentVoice = ScrumPokerBot.Votes.First(gol => gol.MessageId == query.Message.MessageId);
+                var currentVoice = _voiceRepository.Get(query.Message.MessageId.ToString());
                 var variants = currentVoice.Answers;
 
                 //When "Show results is clicked"

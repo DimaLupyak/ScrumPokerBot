@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using BotsController.Models.Data;
+using BotsController.Models.Interfaces;
 using LiteDB;
 
 namespace BotsController.DAL

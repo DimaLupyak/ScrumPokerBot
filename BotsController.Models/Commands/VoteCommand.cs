@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using BotsController.Models.Bots;
+using BotsController.Models.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -11,6 +12,13 @@ namespace BotsController.Models.Commands
 {
     public class VoteCommand : Command
     {
+        private readonly IRepository<Voice> _voiceRepository;
+
+        public VoteCommand(IRepository<Voice> voiceRepository)
+        {
+            _voiceRepository = voiceRepository;
+        }
+
         public override string Name => @"/vote";
 
         public override async Task ExecuteAsync(Message message, TelegramBotClient botClient)
@@ -43,7 +51,7 @@ namespace BotsController.Models.Commands
 
                 var keyboard = new InlineKeyboardMarkup(buttons);
                 var mess = await botClient.SendTextMessageAsync(message.Chat.Id, title, ParseMode.Default, false, false, 0, keyboard);
-                ScrumPokerBot.Votes.Add(new Voice(mess.MessageId, title, variants));
+                _voiceRepository.Insert(new Voice(mess.MessageId, title, variants));
 
             }
             catch (Exception ex)

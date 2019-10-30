@@ -3,6 +3,7 @@ using BotsController.DAL;
 using BotsController.Models;
 using BotsController.Models.Bots;
 using BotsController.Models.Data;
+using BotsController.Models.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -12,10 +13,6 @@ namespace BotsController
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
-        {
-        }
-
         public void ConfigureServices(IServiceCollection services)
         {
             services
