@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BotsController.Models.Bots;
 using BotsController.Models.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -45,6 +44,7 @@ namespace BotsController.Models.Callbacks
                         await client.AnswerCallbackQueryAsync(query.Id, all, true).ConfigureAwait(false);
                         return;
                     }
+
                     if (!currentVoice.Votes.ContainsKey(query.From.FirstName + query.From.LastName))
                     {
                         currentVoice.Votes.Add(query.From.FirstName + query.From.LastName, num);
@@ -68,12 +68,14 @@ namespace BotsController.Models.Callbacks
                     {
                         choicesCount = $" ({currentVoice.Votes.Count(a => a.Value == i)})";
                     }
+
                     buttons[0][i] = new InlineKeyboardButton
                     {
                         Text = variants[i] + choicesCount,
                         CallbackData = "callbackVoice" + i
                     };
                 }
+
                 for (var i = 0; i < 3; i++)
                 {
                     var choicesCount = string.Empty;
@@ -81,6 +83,7 @@ namespace BotsController.Models.Callbacks
                     {
                         choicesCount = $" ({currentVoice.Votes.Count(a => a.Value == i + 4)})";
                     }
+
                     buttons[1][i] = new InlineKeyboardButton
                     {
                         Text = variants[i + 4] + choicesCount,
@@ -88,6 +91,7 @@ namespace BotsController.Models.Callbacks
                     };
 
                 }
+
                 if (buttons.Length > 2)
                 {
                     buttons[2][0] = new InlineKeyboardButton
@@ -97,10 +101,16 @@ namespace BotsController.Models.Callbacks
                     };
                 }
 
+                _voiceRepository.Update(currentVoice);
                 var keyboard = new InlineKeyboardMarkup(buttons);
-                await client.EditMessageTextAsync(query.Message.Chat.Id, currentVoice.MessageId, currentVoice.Question, ParseMode.Default, false, keyboard).ConfigureAwait(false);
+                await client.EditMessageTextAsync(query.Message.Chat.Id, currentVoice.MessageId, currentVoice.Question,
+                    ParseMode.Default, false, keyboard).ConfigureAwait(false);
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                client.SendTextMessageAsync(query.Message.Chat.Id, ex.ToString());
+
+            }
         }
     }
 }
