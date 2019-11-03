@@ -1,8 +1,10 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using BotsController.Core.Helpers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.InputFiles;
 
 namespace BotsController.Models.Commands
 {
@@ -15,8 +17,9 @@ namespace BotsController.Models.Commands
             try
             {
                 string name = message.Text.ToLower().Replace(Name, string.Empty);
-                var joke = GetDamn(name).Result;
-                return botClient.SendTextMessageAsync(message.Chat.Id, joke);
+                var text = GetDamn(name).Result;
+                var speechGenerator = new SpeechGenerator();
+                return botClient.SendAudioAsync(message.Chat.Id, new InputOnlineFile(speechGenerator.SynthesizeSpeech(text), text), text);
             }
             catch (Exception ex)
             {
