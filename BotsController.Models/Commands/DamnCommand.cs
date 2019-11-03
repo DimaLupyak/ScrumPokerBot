@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BotsController.Core.Helpers;
@@ -19,7 +20,9 @@ namespace BotsController.Models.Commands
                 string name = message.Text.ToLower().Replace(Name, string.Empty);
                 var text = GetDamn(name).Result;
                 var speechGenerator = new SpeechGenerator();
-                return botClient.SendAudioAsync(message.Chat.Id, new InputOnlineFile(speechGenerator.SynthesizeSpeech(text), text), text);
+                using var stream = new MemoryStream(speechGenerator.SynthesizeSpeech(text));
+                stream.Seek(0, SeekOrigin.Begin);
+                return botClient.SendAudioAsync(message.Chat.Id, new InputOnlineFile(stream, text), text);
             }
             catch (Exception ex)
             {

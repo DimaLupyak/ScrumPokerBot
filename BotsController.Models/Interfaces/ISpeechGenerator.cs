@@ -7,6 +7,6 @@ namespace BotsController.Core.Interfaces
 {
     public interface ISpeechGenerator
     {
-        MemoryStream SynthesizeSpeech(string text);
+        byte[] SynthesizeSpeech(string text);
     }
 }

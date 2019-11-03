@@ -24,8 +24,9 @@ namespace BotsController.Models.Commands
             {
                 var text = message.Text.ToLower().Replace(Name, string.Empty);
                 var speechGenerator = new SpeechGenerator();
-                botClient.SendTextMessageAsync(message.Chat.Id, text);
-                return botClient.SendAudioAsync(message.Chat.Id, new InputOnlineFile(speechGenerator.SynthesizeSpeech(text), "speech.mp3"), text);
+                using var stream = new MemoryStream(speechGenerator.SynthesizeSpeech(text));
+                stream.Seek(0, SeekOrigin.Begin);
+                return botClient.SendAudioAsync(message.Chat.Id, new InputOnlineFile(stream, text), text);
             }
             catch (Exception ex)
             {

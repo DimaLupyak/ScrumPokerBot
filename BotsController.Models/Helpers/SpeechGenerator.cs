@@ -11,14 +11,7 @@ namespace BotsController.Core.Helpers
 {
     public class SpeechGenerator: ISpeechGenerator
     {
-        public MemoryStream SynthesizeSpeech(string text)
-        {
-            using var stream = new MemoryStream(GetSpeechFromPollyService(text));
-            stream.Seek(0, SeekOrigin.Begin);
-            return stream;
-        }
-
-        private static byte[] GetSpeechFromPollyService(string text)
+        public byte[] SynthesizeSpeech(string text)
         {
             var pollyClient = new AmazonPollyClient(
                 Environment.GetEnvironmentVariable("POLLY_KEY_ID"),
