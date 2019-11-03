@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BotsController.DAL\BotsController.DAL.csproj" />
-    <ProjectReference Include="..\..\BotsController.Models\BotsController.Models.csproj" />
+    <ProjectReference Include="..\..\BotsController.Models\BotsController.Core.csproj" />
   </ItemGroup>
 
   <Target Name="PrePublishTarget" BeforeTargets="PrepareForPublish" Condition="$(DOTNET_RUNNING_IN_CONTAINER) != 'true'">

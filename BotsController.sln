@@ -4,9 +4,9 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotsController", "src\BotsController\BotsController.csproj", "{FA0CC66E-5D01-4557-8438-777D6F18DD75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotsController.DAL", "BotsController.DAL\BotsController.DAL.csproj", "{243441D6-DD60-46DE-ACBA-1BC64FC36B5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotsController.DAL", "BotsController.DAL\BotsController.DAL.csproj", "{243441D6-DD60-46DE-ACBA-1BC64FC36B5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotsController.Models", "BotsController.Models\BotsController.Models.csproj", "{4D478991-0B20-4EDC-9FA5-A873121AC916}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotsController.Core", "BotsController.Models\BotsController.Core.csproj", "{4D478991-0B20-4EDC-9FA5-A873121AC916}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
