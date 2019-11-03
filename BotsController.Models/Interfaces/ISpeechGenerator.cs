@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BotsController.Core.Interfaces
 {
-    public interface ISeechGenerator
+    public interface ISpeechGenerator
     {
         MemoryStream SynthesizeSpeech(string text);
     }
