@@ -37,8 +37,8 @@ namespace BotsController.Core.Commands
             var data = (JArray)JsonConvert.DeserializeObject(myContent);
             return new YerNoResponse
             {
-                Answer = data.SelectToken(".answer").ToString(),
-                Image = data.SelectToken(".image").ToString()
+                Answer = data.SelectToken("$.answer").ToString(),
+                Image = data.SelectToken("$.image").ToString()
             };
         }
 
