@@ -34,7 +34,7 @@ namespace BotsController.Core.Commands
             using var response = await client.GetAsync(@"https://yesno.wtf/api");
             using var content = response.Content;
             var myContent = await content.ReadAsStringAsync();
-            var data = (JArray)JsonConvert.DeserializeObject(myContent);
+            var data = (JObject)JsonConvert.DeserializeObject(myContent);
             return new YerNoResponse
             {
                 Answer = data.SelectToken("$.answer").ToString(),
