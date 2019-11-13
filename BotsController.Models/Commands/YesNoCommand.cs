@@ -12,14 +12,16 @@ namespace BotsController.Core.Commands
     {
         public override string Name => @"так чи ні";
 
-        private readonly Random random = new Random();
+        public override bool ShouldExecute(Message message)
+        {
+            return base.ShouldExecute(message) || message.Text.Contains("???");
+        }
 
         public override Task ExecuteAsync(Message message, TelegramBotClient botClient)
         {
             try
             {
                 var yerNoResponse = GetResponse().Result;
-                botClient.SendTextMessageAsync(message.Chat.Id, yerNoResponse.Answer);
                 return botClient.SendAnimationAsync(message.Chat.Id, yerNoResponse.Image);
             }
             catch (Exception ex)
