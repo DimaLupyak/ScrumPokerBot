@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
+using BotsController.Core.Callbacks;
 using BotsController.Core.Commands;
-using BotsController.Models.Callbacks;
-using BotsController.Models.Commands;
 using Telegram.Bot;
-using Telegram.Bot.Args;
 
-namespace BotsController.Models.Bots
+namespace BotsController.Core.Bots
 {
     public class GrishaBot : ABot
     {
@@ -19,7 +17,8 @@ namespace BotsController.Models.Bots
                 new MaxCommand(),
                 new JokeCommand(),
                 new DamnCommand(),
-                new SpeechCommand()
+                new SpeechCommand(),
+                new YesNoCommand()
             };
             _callbacks = new List<Callback>
             {

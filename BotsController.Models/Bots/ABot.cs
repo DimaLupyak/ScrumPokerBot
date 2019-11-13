@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using BotsController.Models.Callbacks;
-using BotsController.Models.Commands;
+using BotsController.Core.Callbacks;
+using BotsController.Core.Commands;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 
-namespace BotsController.Models.Bots
+namespace BotsController.Core.Bots
 {
     public abstract class ABot
     {

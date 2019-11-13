@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace BotsController.Models.Commands
+namespace BotsController.Core.Commands
 {
     public class PingCommand : Command
     {

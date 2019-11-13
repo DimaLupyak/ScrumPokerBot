@@ -3,7 +3,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace BotsController.Models.Commands
+namespace BotsController.Core.Commands
 {
     public abstract class Command
     {

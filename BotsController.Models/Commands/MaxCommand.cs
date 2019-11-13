@@ -4,7 +4,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.InputFiles;
 
-namespace BotsController.Models.Commands
+namespace BotsController.Core.Commands
 {
     public class MaxCommand : Command
     {

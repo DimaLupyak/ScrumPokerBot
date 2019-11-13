@@ -1,18 +1,12 @@
 using System;
 using System.IO;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using Amazon;
-using Amazon.Polly;
-using Amazon.Polly.Model;
 using BotsController.Core.Helpers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InputFiles;
 
-namespace BotsController.Models.Commands
+namespace BotsController.Core.Commands
 {
     public class SpeechCommand : Command
     {

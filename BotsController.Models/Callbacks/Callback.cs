@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace BotsController.Models.Callbacks
+namespace BotsController.Core.Callbacks
 {
     public abstract class Callback
     {

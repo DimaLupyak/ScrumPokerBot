@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace BotsController.Models.Interfaces
+namespace BotsController.Core.Interfaces
 {
     public interface IRepository<T>
     {

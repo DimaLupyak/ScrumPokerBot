@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.InputFiles;
 
-namespace BotsController.Models.Commands
+namespace BotsController.Core.Commands
 {
     public class SickerCommand : Command
     {

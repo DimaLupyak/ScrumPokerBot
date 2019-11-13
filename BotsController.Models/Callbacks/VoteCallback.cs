@@ -1,14 +1,14 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BotsController.Models.Interfaces;
+using BotsController.Core.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using Voice = BotsController.Models.Data.Voice;
 
-namespace BotsController.Models.Callbacks
+namespace BotsController.Core.Callbacks
 {
     public class VoteCallback : Callback
     {

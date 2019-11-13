@@ -1,14 +1,13 @@
 using System;
 using System.Threading.Tasks;
-using BotsController.Models.Bots;
-using BotsController.Models.Interfaces;
+using BotsController.Core.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using Voice = BotsController.Models.Data.Voice;
 
-namespace BotsController.Models.Commands
+namespace BotsController.Core.Commands
 {
     public class VoteCommand : Command
     {
