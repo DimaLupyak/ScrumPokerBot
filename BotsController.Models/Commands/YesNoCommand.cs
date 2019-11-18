@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace BotsController.Core.Commands
 {
@@ -14,6 +15,9 @@ namespace BotsController.Core.Commands
 
         public override bool ShouldExecute(Message message)
         {
+            if (message.Type != MessageType.Text)
+                return false;
+
             return base.ShouldExecute(message) || message.Text.Contains("???");
         }
 
