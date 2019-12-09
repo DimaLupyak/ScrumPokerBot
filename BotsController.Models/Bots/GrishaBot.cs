@@ -17,6 +17,7 @@ namespace BotsController.Core.Bots
                 new MaxCommand(),
                 new JokeCommand(),
                 new DamnCommand(),
+                new NooCommand(),
                 new SpeechCommand(),
                 new YesNoCommand()
             };
