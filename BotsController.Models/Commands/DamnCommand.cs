@@ -13,7 +13,7 @@ namespace BotsController.Core.Commands
     public class DamnCommand : Command
     {
         public override string Name => @"обізви";
-        private readonly string[] myNames = { "гріша", "гриша", "грішу", "гришу", "григорій", "grisha", "жора" };
+        private readonly string[] myNames = { "гріша", "гриша", "грішу", "гришу", "григорій", "grisha", "жора", "грiша", "грiшу" };
         public override async Task ExecuteAsync(Message message, TelegramBotClient botClient)
         {
             try
