@@ -16,7 +16,10 @@ namespace BotsController.Core.Commands
         {
             try
             {
-                var text = message.Text.ToLower().Replace(Name, string.Empty);
+                var text = message.Text
+                    .ToLower()
+                    .Replace(Name, string.Empty)
+                    .Replace("\"", " ");
                 var speechGenerator = new SpeechGenerator();
                 using var stream = new MemoryStream(speechGenerator.SynthesizeSpeech(text));
                 stream.Seek(0, SeekOrigin.Begin);
