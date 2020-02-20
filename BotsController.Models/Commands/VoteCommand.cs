@@ -25,7 +25,7 @@ namespace BotsController.Core.Commands
             try
             {
                 await botClient.SendPollAsync(
-                    chatId: message.Chat,
+                    chatId: message.Chat.Id,
                     question: "Make your choice",
                     options: new[] { "1", "2", "3", "5", "8", "13", "21" }
                 );
