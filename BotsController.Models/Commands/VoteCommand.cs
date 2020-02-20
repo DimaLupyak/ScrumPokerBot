@@ -11,12 +11,6 @@ namespace BotsController.Core.Commands
 {
     public class VoteCommand : Command
     {
-        private readonly IRepository<Voice> _voiceRepository;
-
-        public VoteCommand(IRepository<Voice> voiceRepository)
-        {
-            _voiceRepository = voiceRepository;
-        }
 
         public override string Name => @"/vote";
 

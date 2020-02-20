@@ -1,9 +1,5 @@
 using System;
 using BotsController.Core.Bots;
-using BotsController.Core.Interfaces;
-using BotsController.DAL;
-using BotsController.Models;
-using BotsController.Models.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -24,8 +20,6 @@ namespace BotsController
                             .AllowAnyMethod()
                             .AllowAnyHeader());
                 });
-            services.AddSingleton(db => new LiteDbContext(Environment.GetEnvironmentVariable("DATA_BASE_FILE")));
-            services.AddSingleton<IRepository<Voice>, LiteDbRepository<Voice>>();
             services.AddSingleton<ScrumPokerBot, ScrumPokerBot>();
             services.AddSingleton<GrishaBot, GrishaBot>();
         }
