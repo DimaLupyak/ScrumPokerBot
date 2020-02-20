@@ -18,10 +18,7 @@ namespace BotsController.Core.Bots
                 new VoteCommand(voiceRepository),
                 new YesNoCommand()
             };
-            _callbacks = new List<Callback>
-            {
-                new VoteCallback(voiceRepository)
-            };
+            _callbacks = new List<Callback> { };
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("SCRUM_POKER_BOT_TOKEN"));
             _botClient.OnMessage += BotOnMessage;

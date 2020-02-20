@@ -21,10 +21,7 @@ namespace BotsController.Core.Bots
                 new SpeechCommand(),
                 new YesNoCommand()
             };
-            _callbacks = new List<Callback>
-            {
-
-            };
+            _callbacks = new List<Callback> { };
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));
             _botClient.OnMessage += BotOnMessage;

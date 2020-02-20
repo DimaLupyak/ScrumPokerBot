@@ -24,34 +24,11 @@ namespace BotsController.Core.Commands
         {
             try
             {
-                var title = "Make your choice";
-                var variants = new[] { "1", "2", "3", "5", "8", "13", "21" };
-                var buttons = new InlineKeyboardButton[2][];
-                buttons[0] = new InlineKeyboardButton[4];
-                buttons[1] = new InlineKeyboardButton[3];
-                for (var i = 0; i < 4; i++)
-                {
-                    buttons[0][i] = new InlineKeyboardButton
-                    {
-                        Text = variants[i],
-                        CallbackData = "callbackVoice" + i
-                    };
-
-                }
-                for (var i = 0; i < 3; i++)
-                {
-                    buttons[1][i] = new InlineKeyboardButton
-                    {
-                        Text = variants[i + 4],
-                        CallbackData = "callbackVoice" + (i + 4)
-                    };
-
-                }
-
-                var keyboard = new InlineKeyboardMarkup(buttons);
-                var mess = await botClient.SendTextMessageAsync(message.Chat.Id, title, ParseMode.Default, false, false, 0, keyboard);
-                _voiceRepository.Insert(new Voice(mess.MessageId, title, variants));
-
+                await botClient.SendPollAsync(
+                    chatId: message.Chat,
+                    question: "Make your choice",
+                    options: new[] { "1", "2", "3", "5", "8", "13", "21" }
+                );
             }
             catch (Exception ex)
             {

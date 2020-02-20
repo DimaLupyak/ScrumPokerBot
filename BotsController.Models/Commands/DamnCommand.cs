@@ -56,7 +56,7 @@ namespace BotsController.Core.Commands
             start = s.IndexOf(">", start + 1, StringComparison.Ordinal);
             start++;
             var end = s.IndexOf("</div", start, StringComparison.Ordinal);
-            var withSpan = s.Substring(start, end - start);
+            var withSpan = s[start..end];
             withSpan = withSpan.Replace("<span class=\"name\">", "");
             withSpan = withSpan.Replace("&mdash; ", "");
             return withSpan.Replace("</span>", "");
