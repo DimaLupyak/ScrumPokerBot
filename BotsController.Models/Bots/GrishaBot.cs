@@ -24,11 +24,7 @@ namespace BotsController.Core.Bots
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));
             _botClient.OnMessage += BotOnMessage;
-            _botClient.StartReceiving();
-
-            var r = new Repository(
-                Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_AUTH"),
-                Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_URL"));
+            _botClient.StartReceiving();            
         }
     }
 }

@@ -28,7 +28,7 @@ namespace BotsController.DAL
 
             foreach (var dino in dinos)
             {
-                return dino.ToString()
+                return dino.ToString();
             }
             return "";
         }
