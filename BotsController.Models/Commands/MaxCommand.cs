@@ -1,3 +1,4 @@
+using BotsController.DAL;
 using System;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -23,7 +24,13 @@ namespace BotsController.Core.Commands
                 }
                 else
                 {
-                    await client.SendTextMessageAsync(message.Chat.Id, "Аве Макс!!!");
+                    var repository = new Repository(
+                        Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_AUTH"),
+                        Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_URL"));
+
+                    repository.AddAsync("АВЕ МАКС");
+                                        
+                    await client.SendTextMessageAsync(message.Chat.Id, repository.GetDataAsync().Result);
                 }
             }
             catch (Exception ex)

@@ -6,6 +6,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotsController", "src\BotsC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotsController.Core", "BotsController.Models\BotsController.Core.csproj", "{4D478991-0B20-4EDC-9FA5-A873121AC916}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotsController.DAL", "BotsController.DAL\BotsController.DAL.csproj", "{EFED1707-8BD1-4BA5-9B8C-C20F305E9878}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{4D478991-0B20-4EDC-9FA5-A873121AC916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D478991-0B20-4EDC-9FA5-A873121AC916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D478991-0B20-4EDC-9FA5-A873121AC916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFED1707-8BD1-4BA5-9B8C-C20F305E9878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFED1707-8BD1-4BA5-9B8C-C20F305E9878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFED1707-8BD1-4BA5-9B8C-C20F305E9878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFED1707-8BD1-4BA5-9B8C-C20F305E9878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
