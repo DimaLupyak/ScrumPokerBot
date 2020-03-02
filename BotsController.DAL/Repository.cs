@@ -1,4 +1,5 @@
 using Firebase.Database;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -19,12 +20,16 @@ namespace BotsController.DAL
 
         public async Task AddAsync(string data)
         {
-            await firebase.Child("test").PostAsync(data);
+            var dino = await firebase
+              .Child("dinosaurs")
+              .PostAsync(JsonConvert.SerializeObject(new Dinosaur()));
         }
 
         public async Task<string> GetDataAsync()
         {
-            var dinos = await firebase.Child("test").OnceAsync<string>();
+            var dinos = await firebase
+               .Child("dinosaurs")
+               .OnceAsync<Dinosaur>();
 
             foreach (var dino in dinos)
             {
@@ -32,5 +37,11 @@ namespace BotsController.DAL
             }
             return "";
         }
+    }
+
+    public class Dinosaur
+    {
+        [JsonProperty()]
+        public double H { get; set; }
     }
 }
