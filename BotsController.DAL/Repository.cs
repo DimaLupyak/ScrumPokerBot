@@ -46,8 +46,9 @@ namespace BotsController.DAL
 
     public class Pidar
     {
-        [JsonProperty()]
+        [JsonProperty]
         public string UserName { get; set; }
+        [JsonProperty]
         public DateTime DateTime { get; set; }
     }
 }
