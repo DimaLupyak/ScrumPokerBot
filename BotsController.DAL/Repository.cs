@@ -22,7 +22,7 @@ namespace BotsController.DAL
         {
             var pidar = new Pidar()
             {
-                DateTime = DateTime.Now,
+              //  DateTime = DateTime.Now,
                 UserName = userName
             };
             var dino = await firebase
@@ -38,7 +38,7 @@ namespace BotsController.DAL
 
             foreach (var pidar in pidars)
             {
-                return $"{pidar.Object.DateTime}: {pidar.Object.UserName}";
+                return $"{pidar.Object.UserName}";
             }
             return "";
         }
@@ -48,7 +48,7 @@ namespace BotsController.DAL
     {
         [JsonProperty]
         public string UserName { get; set; }
-        [JsonProperty]
-        public DateTime DateTime { get; set; }
+       // [JsonProperty]
+       // public DateTime DateTime { get; set; }
     }
 }
