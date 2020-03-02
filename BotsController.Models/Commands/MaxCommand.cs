@@ -28,9 +28,9 @@ namespace BotsController.Core.Commands
                         Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_AUTH"),
                         Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_URL"));
 
-                    repository.AddAsync("АВЕ МАКС");
+                    await repository.AddPidarAsync(message.Contact.FirstName);
                                         
-                    await client.SendTextMessageAsync(message.Chat.Id, repository.GetDataAsync().Result);
+                    await client.SendTextMessageAsync(message.Chat.Id, repository.GetPidarAsync().Result);
                 }
             }
             catch (Exception ex)

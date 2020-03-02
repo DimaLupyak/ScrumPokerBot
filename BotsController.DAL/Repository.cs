@@ -18,30 +18,36 @@ namespace BotsController.DAL
               });
         }
 
-        public async Task AddAsync(string data)
+        public async Task AddPidarAsync(string userName)
         {
+            var pidar = new Pidar()
+            {
+                DateTime = DateTime.Now,
+                UserName = userName
+            };
             var dino = await firebase
-              .Child("dinosaurs")
-              .PostAsync(JsonConvert.SerializeObject(new Dinosaur()));
+              .Child("pidars")
+              .PostAsync(JsonConvert.SerializeObject(userName));
         }
 
-        public async Task<string> GetDataAsync()
+        public async Task<string> GetPidarAsync()
         {
-            var dinos = await firebase
-               .Child("dinosaurs")
-               .OnceAsync<Dinosaur>();
+            var pidars = await firebase
+               .Child("pidars")
+               .OnceAsync<Pidar>();
 
-            foreach (var dino in dinos)
+            foreach (var pidar in pidars)
             {
-                return dino.ToString();
+                return $"{pidar.Object.DateTime}: {pidar.Object.UserName}";
             }
             return "";
         }
     }
 
-    public class Dinosaur
+    public class Pidar
     {
         [JsonProperty()]
-        public double H { get; set; }
+        public string UserName { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }
