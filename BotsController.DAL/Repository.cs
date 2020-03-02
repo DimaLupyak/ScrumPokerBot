@@ -27,7 +27,7 @@ namespace BotsController.DAL
             };
             var dino = await firebase
               .Child("pidars")
-              .PostAsync(JsonConvert.SerializeObject(userName));
+              .PostAsync(JsonConvert.SerializeObject(pidar));
         }
 
         public async Task<string> GetPidarAsync()
