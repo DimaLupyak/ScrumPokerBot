@@ -22,7 +22,7 @@ namespace BotsController.DAL
         {
             var pidar = new Pidar()
             {
-                DateTime = DateTime.Now.ToShortTimeString(),
+                DateTime = DateTime.Now.ToString(),
                 UserName = userName
             };
             var dino = await firebase
