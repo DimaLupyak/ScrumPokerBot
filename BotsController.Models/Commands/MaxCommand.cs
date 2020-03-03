@@ -28,7 +28,7 @@ namespace BotsController.Core.Commands
                         Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_AUTH"),
                         Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_URL"));
 
-                    await repository.AddPidarAsync(message.Contact.FirstName ?? "name");
+                    await repository.AddPidarAsync("name");
                                         
                     await client.SendTextMessageAsync(message.Chat.Id, repository.GetPidarAsync().Result);
                 }
