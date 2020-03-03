@@ -38,7 +38,7 @@ namespace BotsController.DAL
 
             foreach (var pidar in pidars)
             {
-                return $"{pidar.Object.UserName}";
+                return $"{pidar.Object.DateTime}: {pidar.Object.UserName}";
             }
             return "";
         }
