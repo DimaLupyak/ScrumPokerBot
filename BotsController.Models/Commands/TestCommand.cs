@@ -7,25 +7,23 @@ using Telegram.Bot.Types.InputFiles;
 
 namespace BotsController.Core.Commands
 {
-    public class MaxCommand : Command
+    public class TestCommand : Command
     {
-        public override string Name => @"макс";
+        public override string Name => @"test";
 
-        private string maxStickerFileId = "CAADAgADXAADXnqpFgYOGj8qLFTeFgQ";
         readonly Random random = new Random();
         public override async Task ExecuteAsync(Message message, TelegramBotClient client)
         {
             try
             {
-                if (random.Next(100) < 20)
-                {
-                    await client.SendStickerAsync(message.Chat.Id,
-                        new InputOnlineFile(maxStickerFileId));
-                }
-                else
-                {
-                    await client.SendTextMessageAsync(message.Chat.Id, "Аве Макс!!!");
-                }
+                var repository = new Repository(
+                    Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_AUTH"),
+                    Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_URL"));
+
+                await repository.AddPidarAsync("test");
+
+                await client.SendTextMessageAsync(message.Chat.Id, repository.GetPidarAsync().Result);
+
             }
             catch (Exception ex)
             {
