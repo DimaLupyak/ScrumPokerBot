@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using BotsController.Core.Commands;
-using BotsController.DAL;
 using Telegram.Bot;
 
 namespace BotsController.Core.Bots
@@ -19,7 +18,8 @@ namespace BotsController.Core.Bots
                 new DamnCommand(),
                 new NooCommand(),
                 new SpeechCommand(),
-                new YesNoCommand()
+                new YesNoCommand(),
+                new TestCommand()
             };
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));
