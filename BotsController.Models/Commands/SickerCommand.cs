@@ -13,18 +13,35 @@ namespace BotsController.Core.Commands
         public override string Name => @"sticker";
 
         private readonly string[] stickerPacks =
-            {
-                "BlueRobots",
-                "VoldemarDenchik",
-                "metairony",
-                "sad_crying_cat",
-                "BOMZHI_eeZee",
-                "citati_prosto"
-            };
+        {
+            "BlueRobots",
+            "VoldemarDenchik",
+            "metairony",
+            "sad_crying_cat",
+            "BOMZHI_eeZee",
+            "citati_prosto"
+        };
 
+        private const float MinPossibility = 1;
+        private const float MaxPossibility = 10;
+        private const float PossibilityStep = 0.1f;
+
+        private float possibility = 5;
+        
         public override bool ShouldExecute(Message message)
         {
-            return random.Next(100) < 5;
+            if (possibility < MaxPossibility)
+            {
+                possibility += PossibilityStep;
+            }
+
+            if (random.Next(100) < possibility)
+            {
+                possibility = MinPossibility;
+                return true;
+            }
+
+            return false;
         }
 
         public override async Task ExecuteAsync(Message message, TelegramBotClient client)
