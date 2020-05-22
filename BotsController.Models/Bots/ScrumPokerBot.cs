@@ -13,6 +13,7 @@ namespace BotsController.Core.Bots
             {
                 new PingCommand(),
                 new VoteCommand(),
+                new SpeechCommand(),
                 new YesNoCommand()
             };
 
