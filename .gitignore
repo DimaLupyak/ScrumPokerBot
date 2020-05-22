@@ -196,3 +196,4 @@ project.lock.json
 
 node_modules
 **/wwwroot/**/*
+src/BotsController/Properties/launchSettings.json

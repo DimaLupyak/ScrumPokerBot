@@ -1,11 +1,13 @@
 using Firebase.Database;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BotsController.DAL
 {
-    public class Repository
+    public class Repository<T>
     {
         protected readonly FirebaseClient firebase;
         public Repository(string authSecret, string url)
@@ -18,37 +20,22 @@ namespace BotsController.DAL
               });
         }
 
-        public async Task AddPidarAsync(string userName)
+        public async Task AddAsync(T resource)
         {
-            var pidar = new Pidar()
-            {
-                DateTime = DateTime.Now.ToString(),
-                UserName = userName
-            };
-            var dino = await firebase
-              .Child("pidars")
-              .PostAsync(JsonConvert.SerializeObject(pidar));
+            var user = await firebase
+              .Child(typeof(T).Name)
+              .PostAsync(JsonConvert.SerializeObject(resource));
         }
 
-        public async Task<string> GetPidarAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            var pidars = await firebase
-               .Child("pidars")
-               .OnceAsync<Pidar>();
+            var resources = await firebase
+               .Child(typeof(T).Name)
+               .OnceAsync<T>();
 
-            foreach (var pidar in pidars)
-            {
-                return $"{pidar.Object.DateTime}: {pidar.Object.UserName}";
-            }
-            return "";
+            return resources.Select(x => x.Object);
         }
     }
 
-    public class Pidar
-    {
-        [JsonProperty]
-        public string UserName { get; set; }
-        [JsonProperty]
-        public string DateTime { get; set; }
-    }
+    
 }

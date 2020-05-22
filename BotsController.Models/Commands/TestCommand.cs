@@ -1,5 +1,6 @@
 using BotsController.DAL;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -16,13 +17,25 @@ namespace BotsController.Core.Commands
         {
             try
             {
-                var repository = new Repository(
+                var repository = new Repository<Models.User>(
                     Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_AUTH"),
                     Environment.GetEnvironmentVariable("GRISHA_BOT_FIREBASE_URL"));
 
-                await repository.AddPidarAsync("test");
+                var user = new Models.User()
+                {
+                    ChatId = message.Chat.Id.ToString(),
+                    UserId = message.From.Id.ToString(),
+                    DateTime = message.Date,
+                    UserName = message.From.Username ?? message.From.FirstName + message.From.LastName
+                };
 
-                await client.SendTextMessageAsync(message.Chat.Id, repository.GetPidarAsync().Result);
+                await repository.AddAsync(user);
+
+                var allUsers = await repository.GetAllAsync().ConfigureAwait(false);
+
+                await client.SendTextMessageAsync(
+                    message.Chat.Id,
+                    string.Join(", ", allUsers.Select(x=>x.UserName)));
 
             }
             catch (Exception ex)

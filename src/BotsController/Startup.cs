@@ -20,7 +20,7 @@ namespace BotsController
                             .AllowAnyMethod()
                             .AllowAnyHeader());
                 });
-            services.AddSingleton<ScrumPokerBot, ScrumPokerBot>();
+            //services.AddSingleton<ScrumPokerBot, ScrumPokerBot>();
             services.AddSingleton<GrishaBot, GrishaBot>();
         }
 
