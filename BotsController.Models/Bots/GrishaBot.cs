@@ -19,7 +19,7 @@ namespace BotsController.Core.Bots
                 new NooCommand(),
                 new SpeechCommand(),
                 new YesNoCommand(),
-                new TestCommand()
+                new ComicsCommand()
             };
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));

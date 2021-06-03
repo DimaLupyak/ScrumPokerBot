@@ -14,7 +14,10 @@ namespace BotsController.Core.Bots
                 new PingCommand(),
                 new VoteCommand(),
                 new SpeechCommand(),
-                new YesNoCommand()
+                new YesNoCommand(),
+                new NooCommand(),
+                new JokeCommand(),
+                new ComicsCommand()
             };
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("SCRUM_POKER_BOT_TOKEN"));
