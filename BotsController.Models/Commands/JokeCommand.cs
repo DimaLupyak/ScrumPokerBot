@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using File = System.IO.File;
 
 namespace BotsController.Core.Commands
 {
@@ -29,14 +30,8 @@ namespace BotsController.Core.Commands
 
         private async Task<string> GetJoke()
         {
-            using var client = new HttpClient();
-            using var response = await client.GetAsync(@"http://umorili.herokuapp.com/api/get?num=50&name=bash");
-            using var content = response.Content;
-            var myContent = await content.ReadAsStringAsync();
-            var data = (JArray)JsonConvert.DeserializeObject(myContent);
-            var token = data.SelectToken($"$.[{random.Next(data.Count)}].elementPureHtml");
-            var value = token as JValue;
-            return value.Value<string>().Replace(@"<br />", "").Replace(@"&quot;", "");
+            var allJokes = File.ReadAllText(@"Files\jokes.txt").Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            return allJokes[random.Next(allJokes.Length)];
         }
     }
 }
