@@ -24,9 +24,10 @@ namespace BotsController.Core.Bots
                 new ComicsCommand()
             }.AsReadOnly();
 
-            _commands.AddRange(_allCommands);
 
             _commands.Add(new CommandsControlCommand(_commands, _allCommands));
+            _commands.AddRange(_allCommands);
+
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));
             _botClient.OnMessage += BotOnMessage;
