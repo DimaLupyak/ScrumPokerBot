@@ -10,7 +10,7 @@ namespace BotsController.Core.Bots
     {
         protected readonly DateTime RunTime = DateTime.Now;
         protected TelegramBotClient _botClient;
-        protected List<Command> _commands;
+        protected List<Command> _commands = new List<Command>();
            
         protected virtual void BotOnMessage(object sender, MessageEventArgs e)
         {
