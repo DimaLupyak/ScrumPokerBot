@@ -11,9 +11,7 @@ namespace BotsController.Core.Bots
         protected readonly DateTime RunTime = DateTime.Now;
         protected TelegramBotClient _botClient;
         protected List<Command> _commands;
-        
-        protected IReadOnlyList<Command> Commands => _commands.AsReadOnly();
-        
+           
         protected virtual void BotOnMessage(object sender, MessageEventArgs e)
         {
             if (e.Message.Date.ToFileTimeUtc() < RunTime.ToFileTimeUtc())
@@ -21,7 +19,7 @@ namespace BotsController.Core.Bots
 
             var message = e.Message;
 
-            foreach (var command in Commands)
+            foreach (var command in _commands)
             {
                 if (command.ShouldExecute(message))
                 {
