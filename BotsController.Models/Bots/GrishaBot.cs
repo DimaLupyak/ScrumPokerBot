@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using BotsController.Core.Commands;
 using Telegram.Bot;
+using Telegram.Bot.Args;
 
 namespace BotsController.Core.Bots
 {
     public class GrishaBot : ABot
     {
+        private IReadOnlyList<Command> _allCommands;
         public GrishaBot()
         {
-            _commands = new List<Command>
+            _allCommands = new List<Command>
             {
                 new PingCommand(),
                 new SickerCommand(),
@@ -20,11 +22,16 @@ namespace BotsController.Core.Bots
                 new SpeechCommand(),
                 new YesNoCommand(),
                 new ComicsCommand()
-            };
+            }.AsReadOnly();
+
+            _commands.AddRange(_allCommands);
+
+            _commands.Add(new CommandsControlCommand(_commands, _allCommands));
 
             _botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("GRISHA_BOT_TOKEN"));
             _botClient.OnMessage += BotOnMessage;
-            _botClient.StartReceiving();            
+            _botClient.StartReceiving();
         }
+
     }
 }
